@@ -1,0 +1,10 @@
+# Wellesley College login config:
+CAS_SERVER = "https://login.wellesley.edu:443"
+CAS_LOGIN_ROUTE = "/module.php/casserver/cas.php/login"
+CAS_LOGOUT_ROUTE = "/module.php/casserver/cas.php/logout"
+CAS_VALIDATE_ROUTE = "/module.php/casserver/serviceValidate.php"
+CAS_AFTER_LOGIN = "route_root"
+
+# Solution & permissions directories
+SOLUTIONS_DIRECTORY = "solutions"
+PERMISSIONS_DIRECTORY = "permissions"

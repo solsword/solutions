@@ -1,0 +1,23 @@
+{
+  "admins": [ "pmawhort" ],
+  "roster": [
+    "pmawhort"
+  ],
+  "puzzles": {
+    "practice-vars_1": { "allow": true, "allow_any": true, "deny": [ "someuser", "anotheruser" ] },
+    "practice-vars_2": { "allow": true, "deny": [ "test" ] },
+    "ps03-diamonds": { "allow": true, "allow_any": true, "deny": [] },
+    "ps04-rps": { "allow": true, "allow_any": true, "deny": [] },
+    "ps04-maze": { "allow": true, "allow_any": true, "deny": [] },
+    "ps04-quiz": { "allow": true, "allow_any": true, "deny": [] },
+    "ps05-circles": { "allow": true, "allow_any": true, "deny": [] },
+    "ps06-wordsearch": { "allow": true, "allow_any": true, "deny": [] },
+    "ps06-sumgame": { "allow": true, "allow_any": true, "deny": [] },
+    "ps07-helper": { "allow": true, "allow_any": true, "deny": [] },
+    "ps07-sorting": { "allow": true, "allow_any": true, "deny": [] },
+    "ps07-looping": { "allow": true, "allow_any": true, "deny": [] },
+    "ps08-titanic": { "allow": true, "allow_any": true, "deny": [] },
+    "ps08-unjumble": { "allow": true, "allow_any": true, "deny": [] },
+    "ps09-hourglass": { "allow": true, "allow_any": true, "deny": [] }
+  }
+}

@@ -1,0 +1,27 @@
+body {
+  font-size: larger;
+}
+
+#user_info {
+  padding: 4pt;
+}
+
+a:link, a:visited {
+  color: #049;
+}
+
+a:link:hover, a:visited:hover {
+  color: #08d;
+}
+
+.solution_file {
+  display: block;
+}
+
+details details {
+  margin-left: 16pt;
+}
+
+details a {
+  margin-left: 16pt;
+}

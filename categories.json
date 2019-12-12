@@ -1,0 +1,14 @@
+{
+  "id": "cs111",
+  "name": "CS 111 Puzzles",
+  "items": [
+    {
+      "id": "practice",
+      "name": "Practice Problems",
+      "items": [
+        { "load_id": "practice-vars_1" },
+        { "load_id": "practice-vars_2" }
+      ]
+    }
+  ]
+}

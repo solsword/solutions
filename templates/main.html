@@ -1,0 +1,23 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Solutions for {{class}}</title>
+    <meta charset="utf-8"/>
+    <meta name="author" content="Peter Mawhorter"/>
+    <link rel="stylesheet" href="{{url_for('static', filename='solutions.css')}}"/>
+    <link rel="stylesheet" href="{{url_for('static', filename='lib/prism.css')}}"/>
+    <script type="text/javascript" src="{{url_for('static', filename='lib/prism.js')}}" data-manual></script>
+    <script type="text/javascript" src="{{url_for('static', filename='solutions.js')}}"></script>
+  </head>
+  <body onload="setup();">
+    <div id="user_info">
+    {% if username %}
+      You are logged in as: {{username}}. <a href="{{url_for('cas.logout')}}">Click here to log out.</a>
+    {% else %}
+      You are not logged in. Solutions may be unavailable. <a href="{{url_for('cas.login')}}">Click here to log in.</a>
+    {% endif %}
+    </div>
+    <div id="solution_display">
+    </div>
+  </body>
+</html>

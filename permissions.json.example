@@ -1,0 +1,27 @@
+{
+  "admins": [ "test_instructor" ],
+  "roster": [ "test_student" ],
+  "controls": {
+    "assignment_0": {
+      "release": true,
+      "release_to": "world",
+      "deny": []
+    },
+    "assignment_1": {
+      "release": true,
+      "release_to": "roster",
+      "deny": []
+    },
+    "assignment_2": {
+      "release": "2019-12-12 13:59",
+      "release_to": "world",
+      "submitted": [ "test_student" ],
+      "deny": []
+    },
+    "assignment_2/part3.py": {
+      "release": false,
+      "release_to": [ "test_student", "test_instructor" ],
+      "deny": [ "test_student" ]
+    }
+  }
+}

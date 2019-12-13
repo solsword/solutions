@@ -27,9 +27,6 @@ function load_json(url, continuation) {
         console.log(xobj.responseText);
         console.log(e);
       }
-      console.log(json);
-      console.log(xobj.responseText);
-      console.log(xobj);
       continuation(json);
     }
   }
@@ -45,8 +42,7 @@ function load_json(url, continuation) {
 }
 
 function build_solution_links(solutions_map) {
-  console.log(solutions_map);
-  elem = build_link_list("Solutions", "/solution", solutions_map);
+  elem = build_link_list("Solutions", "solution", solutions_map);
   document.getElementById("solution_display").appendChild(elem);
 }
 
@@ -55,7 +51,6 @@ function build_link_list(title, prefix, map) {
   result.setAttribute("open", true);
   var sum = document.createElement("summary");
   result.appendChild(sum);
-  console.log(map);
   sum.innerHTML = title;
   var here = Object.keys(map);
   here.sort();
@@ -88,6 +83,5 @@ function build_link_list(title, prefix, map) {
 
 // To be run on load:
 function setup() {
-  console.log("HERE");
   load_json("list", build_solution_links);
 }

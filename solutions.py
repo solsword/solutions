@@ -87,7 +87,7 @@ def returnJSON(f):
   """
   def wrapped(*args, **kwargs):
     r = f(*args, **kwargs)
-    return json.dumps(r)
+    return flask.Response(json.dumps(r), mimetype="application/json")
 
   wrapped.__name__ = f.__name__
   return wrapped
@@ -151,7 +151,7 @@ def route_solution(target):
       if os.path.isfile(target):
         # Open in binary mode as we don't know what kind of file it is...
         with open(target, 'rb') as fin:
-          return fin.read()
+          return flask.Response(fin.read(), mimetype="text/plain")
       else:
         return ("Invalid solution file '{}' (isn't a file)", 400)
     else:
@@ -277,7 +277,7 @@ def get_file_structure(path):
       # call into entry named after symlink, as appropraite)
       return get_file_structure(path)
     else:
-      print("Invalid path: '{}'".format(path), file=sys.stderr)
+      print("Invalid path: '{}'".format(path))
       return None
 
 #----------------#
@@ -434,15 +434,10 @@ def get_current_permissions():
       tbe = traceback.TracebackException.from_exception(e)
       print(
         "Error loading permissions from directory '{}':\n".format(pd)
-      + '\n'.join(tbe.format()),
-        file=sys.stderr
+      + '\n'.join(tbe.format())
       )
     else:
-      print(
-        "Error loading permissions from directory '{}':".format(pd),
-        file=sys.stderr
-      )
-      # TODO: Do this to stderr too!
+      print("Error loading permissions from directory '{}':".format(pd))
       traceback.print_exception(*sys.exc_info())
     return DEFAULT_PERMISSIONS
 
@@ -462,22 +457,26 @@ def slurp_permissions(directory):
     full = os.path.join(directory, entry)
     while os.path.islink(full):
       full = os.path.readlink(full)
-    if os.path.isfile(full):
+    if (
+      os.path.isfile(full)
+  and not os.path.basename(full).startswith('.')
+  and full.endswith(".json")
+    ):
+      perms = None
       try:
         with open(full, 'r') as fin:
           perms = json.load(fin)
       except:
         print(
           "Warning: file '{}' could not be interpreted as a JSON object."
-          .format(
-            full
-          ),
-          file=sys.stderr
+          .format(full)
         )
-      result = merge_permissions(result, perms)
+      if perms != None:
+        result = merge_permissions(result, perms)
     elif os.path.isdir(full):
       result = merge_permissions(result, slurp_permissions(full), full)
-    # else ignore this non-file non-directory entry.
+    # else ignore this hidden file, non-.json file, or non-file non-directory
+    # entry.
   return result
 
 def merge_unique_lists(a, b):
@@ -508,8 +507,7 @@ def merge_permissions(sofar, novel, novel_src = "Unknown"):
         (
           "Warning: permissions from '{}' contain duplicate controls for "
         + "solution path '{}'."
-        ).format(novel_src, key),
-        file=sys.stderr
+        ).format(novel_src, key)
       )
       # New controls settings override old ones individually, except deny and
       # submitted lists which accrete.
